@@ -12,7 +12,7 @@ public class Main {
 		ExcelLoader excelLoader = new ExcelLoader();
 		Calculator calculator = new Calculator();
 		Workbook wb = excelLoader.loadExcelFile(file);
-		calculator.calculateHoursWorked(wb);
+		System.out.println(calculator.calculateHoursWorked(wb));
 		
 	}
 
