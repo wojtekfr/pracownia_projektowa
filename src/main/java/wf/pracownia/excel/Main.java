@@ -10,11 +10,10 @@ public class Main {
 		String file = "src/main/resources/2012/01/Kowalski_Jan.xls";
 		
 		ExcelLoader excelLoader = new ExcelLoader();
-		
+		Calculator calculator = new Calculator();
 		Workbook wb = excelLoader.loadExcelFile(file);
-		for (Sheet sheet: wb) {
-			System.out.println(sheet.getSheetName());
-		}
+		calculator.calculateHoursWorked(wb);
+		
 	}
 
 }
