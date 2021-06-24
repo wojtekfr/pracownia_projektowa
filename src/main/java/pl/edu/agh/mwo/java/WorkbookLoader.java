@@ -10,7 +10,9 @@ import java.io.IOException;
 public class WorkbookLoader {
 
     public static Workbook openF1Workbook() {
-        try {
+        
+    	
+    	try {
             return WorkbookFactory.create(new File("src/main/resources/f1-results.xlsx"));
         } catch (EncryptedDocumentException | IOException e) {
             e.printStackTrace();
