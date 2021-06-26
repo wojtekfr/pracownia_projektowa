@@ -6,8 +6,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class Calculator {
 
-	public int calculateHoursWorked(Workbook workbook) {
-		int hoursWorked =0;
+	public float calculateHoursWorked(Workbook workbook) {
+		float hoursWorked =0;
 		for (Sheet sheet: workbook) {
 			System.out.println(sheet.getSheetName());
 			for (Row row: sheet) {
