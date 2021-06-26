@@ -12,8 +12,11 @@ public class Calculator {
 			System.out.println(sheet.getSheetName());
 			for (Row row: sheet) {
 				if (row.getRowNum()!=0) {
-					hoursWorked += row.getCell(2).getNumericCellValue();
-				}
+					if (row.getCell(2) != null) {
+						hoursWorked += row.getCell(2).getNumericCellValue();
+					}
+					
+					}
 			}
 		}
 		return hoursWorked;
