@@ -99,4 +99,26 @@ public class Calculator {
 		return resultsByMonth;
 	}
 
+	public Map<Date, Double> calculateTotalsByDay(Employees employees) {
+		Map<Date, Double> resultsByDay = new HashMap<Date, Double>();
+		Date date;
+		for (Employee employee : employees.getEmployees()) {
+			for (Year year : employee.getYearsWhenEmployeeWorked()) {
+				for (Month month : year.getMonths()) {
+					for (Day day : month.getDays()) {
+						date = new Date(year.getCalendarYear(), month.getMonthNumber(), day.getDayNumber());
+						if (resultsByDay.get(date) == null) {
+							resultsByDay.put(date, (double) 0);
+						}
+						double hours = resultsByDay.get(date);
+						hours += day.getHoursWorked();
+						resultsByDay.put(date, hours);
+					}
+				}
+			}
+		}
+
+		return resultsByDay;
+	}
+	
 }

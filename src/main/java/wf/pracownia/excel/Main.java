@@ -31,6 +31,8 @@ public class Main {
 		calculator.calculateTotalsByMonths(employees);
 		Map<Date, Double> resultsByMonth = calculator.calculateTotalsByMonths(employees);
 		System.out.println(resultsByMonth);
+		Map<Date, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
+		System.out.println(resultsByDay);
 		
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
