@@ -29,29 +29,51 @@ public class Calculator {
 
 	}
 
-	public double calculateTotalWork(String path, Employees employees) {
+	public void calculateTotalWork(String path, Employees employees) {
 		double totalHoursWorked = 0;
 		ArrayList<File> excelFiles = excelLoader.FindAllExcleFiles(path);
 
 		for (File file : excelFiles) {
 
 			Workbook wb = excelLoader.loadExcelFile(file);
-			System.out.println(file.getName());
+
 			String currentEmployeeName = utilities.parseNameFromFile(file.getName());
 
 			if (employees.findEmployeeByName(currentEmployeeName) == null) {
-				
+
 				employees.addNewEmployee(currentEmployeeName);
+				System.out.println("dodałem " + currentEmployeeName);
 			}
-	
-			// System.out.println("przed " + totalHoursWorked);
-			totalHoursWorked += calculateHoursWorked(wb);
 
-			System.out.println("po  " + totalHoursWorked);
+			for (Sheet sheet : wb) {
+				System.out.println(sheet.getSheetName());
+				for (Row row : sheet) {
+					if (row.getRowNum() != 0) {
+						if (row.getCell(2) != null) {
+							System.out.println(row.getCell(0));
+							System.out.println(row.getCell(0).getDateCellValue());
+							System.out.println("dzien " + row.getCell(0).getDateCellValue().getDate());
+							int year = 1900 + row.getCell(0).getDateCellValue().getYear();		
+							int month = row.getCell(0).getDateCellValue().getMonth();	
+							int day = row.getCell(0).getDateCellValue().getDate();
+							System.out.println(year);
+							System.out.println(month);
+							System.out.println(day);
+							employees.findEmployeeByName(currentEmployeeName).addNewYearToEmployee(year);						
+							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year).addNewMonthToYear(month);
+							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year).findMonthbyCalendarNumber(month)
+							.addNewDay(day);
+							System.out.println("dodaje dzien " + day + "miesiac " + month  );
+							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year).findMonthbyCalendarNumber(month)
+							.findDaybyCalendarNumber(day).increaseHoursWorked(day, row.getCell(2).getNumericCellValue() );
+						}
+
+					}
+
+				}
+
+			
+			}
 		}
-
-		System.out.println(totalHoursWorked);
-
-		return 0;
 	}
 }

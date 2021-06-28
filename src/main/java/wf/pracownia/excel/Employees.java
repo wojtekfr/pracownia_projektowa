@@ -32,7 +32,8 @@ public class Employees {
 
 	public void addNewEmployee(String name) {
 		employees.add(new Employee(name));
-		
-		
+	}
+	public int getNumberOfEmployees() {
+		return employees.size(); 
 	}
 }

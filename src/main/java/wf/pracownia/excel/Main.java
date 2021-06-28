@@ -17,9 +17,12 @@ public class Main {
 		Calculator calculator = new Calculator();
 		Employees employees = new Employees();
 		String path = "src/main/resources/";
+		System.out.println(" mam " + employees.getNumberOfEmployees());
 		calculator.calculateTotalWork(path, employees);
 		System.out.println("--");
-
+		
+		System.out.println(" mam " + employees.getNumberOfEmployees());
+		
 	employees.addNewEmployee("Janusz");
 	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
 		
@@ -43,6 +46,8 @@ public class Main {
 	employees.findEmployeeByName("Grazyna").findYearByCalendarYear(2012).getMonth(0).addNewDay(0);
 	employees.findEmployeeByName("Grazyna").findYearByCalendarYear(2012).getMonth(0).findDaybyCalendarNumber(0).increaseHoursWorked(0, 10);
 
+	
+
 		for (Employee employee : employees.getEmployees()) {
 			System.out.println(employee.getName());
 			for (Year year : employee.getYearsWhenEmployeeWorked()) {
@@ -57,11 +62,6 @@ public class Main {
 			}
 	
 		}
-
-		System.out.println();
-		
-		System.out.println();
-
 
 
 

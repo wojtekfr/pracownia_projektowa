@@ -30,10 +30,8 @@ public class Year {
 
 		if (findMonthbyCalendarNumber(monthNumber) == null) {
 		months.add(new Month(monthNumber));
-		System.out.println("dodaje " + monthNumber);
 		}
 		else {
-			System.out.println("nie dodaje");
 		}
 	}
 	
