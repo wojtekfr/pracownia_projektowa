@@ -20,33 +20,38 @@ public class Main {
 		calculator.calculateTotalWork(path, employees);
 		System.out.println("--");
 
-//		employees.addNewEmployee("Janusz");
-//		employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
-//		
-//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 66);
-//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 33);
-//
-//		employees.getEmployeeByOrderId(0).addNewYearToEmployee(2013);
-//		employees.getEmployeeByOrderId(0).getYearByOrder(1).increaseHoursWorkedInMonth(0, 10);
-//		employees.getEmployeeByOrderId(0).getYearByOrder(1).increaseHoursWorkedInMonth(1, 13);
-//
-//		employees.addNewEmployee("Grazyna");
-//		employees.getEmployeeByOrderId(1).addNewYearToEmployee(2012);
-//		employees.getEmployeeByOrderId(1).getYearByOrder(0).increaseHoursWorkedInMonth(1, 333);
-//		employees.getEmployeeByOrderId(1).addNewYearToEmployee(2020);
-//		employees.getEmployeeByOrderId(1).getYearByOrder(1).increaseHoursWorkedInMonth(3, 666);
-//		
-//		employees.findEmployeeByName("Janusz").getYearByOrder(0).increaseHoursWorkedInMonth(0, 13);
-//		
-//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(0, 7);
+	employees.addNewEmployee("Janusz");
+	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
+		
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).addNewMonthToYear(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).getMonth(0).addNewDay(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).getMonth(0).findDaybyCalendarNumber(0).increaseHoursWorked(0, 10);
+	
+	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).addNewMonthToYear(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).getMonth(0).addNewDay(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2012).getMonth(0).findDaybyCalendarNumber(0).increaseHoursWorked(0, 10);
+	
+	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2013);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2013).addNewMonthToYear(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2013).getMonth(0).addNewDay(0);
+	employees.findEmployeeByName("Janusz").findYearByCalendarYear(2013).getMonth(0).findDaybyCalendarNumber(0).increaseHoursWorked(0, 10);
+	
+	employees.addNewEmployee("Grazyna");
+	employees.findEmployeeByName("Grazyna").addNewYearToEmployee(2012);
+	employees.findEmployeeByName("Grazyna").findYearByCalendarYear(2012).addNewMonthToYear(0);
+	employees.findEmployeeByName("Grazyna").findYearByCalendarYear(2012).getMonth(0).addNewDay(0);
+	employees.findEmployeeByName("Grazyna").findYearByCalendarYear(2012).getMonth(0).findDaybyCalendarNumber(0).increaseHoursWorked(0, 10);
 
 		for (Employee employee : employees.getEmployees()) {
 			System.out.println(employee.getName());
 			for (Year year : employee.getYearsWhenEmployeeWorked()) {
-				System.out.println(year.getCalendarYear());
-				int counter = 0;
-				for (double hours : year.getHoursWorkedInGivenMonth()) {
-					System.out.println("miesiac : " + counter + " : " + hours);
+				System.out.println("Rok " + year.getCalendarYear());
+				for (Month month : year.getMonths()) {
+				 System.out.println("Miesiąc " + month.getMonthNumber());
+				 int counter = 0;
+				 for (Day day : month.getDays()) {
+					System.out.println("dzień : " + day.getDayNumber() + " : " + day.getHoursWorked());
 					counter++;
 				}
 			}
@@ -81,5 +86,6 @@ public class Main {
 		// System.out.println(aaa);
 
 	}
-
+	}
 }
+

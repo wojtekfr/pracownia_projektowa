@@ -18,6 +18,7 @@ public class Calculator {
 			for (Row row : sheet) {
 				if (row.getRowNum() != 0) {
 					if (row.getCell(2) != null) {
+						System.out.println(row.getCell(0).getDateCellValue());
 						hoursWorked += row.getCell(2).getNumericCellValue();
 					}
 
@@ -41,8 +42,6 @@ public class Calculator {
 			if (employees.findEmployeeByName(currentEmployeeName) == null) {
 				
 				employees.addNewEmployee(currentEmployeeName);
-				System.out.println(currentEmployeeName);
-				System.out.println(employees.getEmployees().size());
 			}
 	
 			// System.out.println("przed " + totalHoursWorked);
