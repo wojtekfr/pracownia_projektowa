@@ -6,6 +6,8 @@ public class Employee {
 	private ArrayList<Year> yearsWhenEmployeeWorked = new ArrayList<Year>();
 	private String name;
 
+		
+	
 	public ArrayList<Year> getYearsWhenEmployeeWorked() {
 		return yearsWhenEmployeeWorked;
 	}

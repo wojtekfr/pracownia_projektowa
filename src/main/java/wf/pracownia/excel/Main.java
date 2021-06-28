@@ -9,35 +9,38 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class Main {
 
-	static ArrayList<Employee> employees = new ArrayList<Employee>();
+
 
 	public static void main(String[] args) {
 		System.out.println("main");
-
-		ExcelLoader excelLoader = new ExcelLoader();
+		
 		Calculator calculator = new Calculator();
+		Employees employees = new Employees();
+		String path = "src/main/resources/";
+		calculator.calculateTotalWork(path, employees);
+		System.out.println("--");
 
-		employees.add(new Employee("Janusz"));
-		findEmployeeByName("Janusz").addNewYearToEmployee(2012);
-		
-		findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 66);
-		findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 33);
+//		employees.addNewEmployee("Janusz");
+//		employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
+//		
+//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 66);
+//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(1, 33);
+//
+//		employees.getEmployeeByOrderId(0).addNewYearToEmployee(2013);
+//		employees.getEmployeeByOrderId(0).getYearByOrder(1).increaseHoursWorkedInMonth(0, 10);
+//		employees.getEmployeeByOrderId(0).getYearByOrder(1).increaseHoursWorkedInMonth(1, 13);
+//
+//		employees.addNewEmployee("Grazyna");
+//		employees.getEmployeeByOrderId(1).addNewYearToEmployee(2012);
+//		employees.getEmployeeByOrderId(1).getYearByOrder(0).increaseHoursWorkedInMonth(1, 333);
+//		employees.getEmployeeByOrderId(1).addNewYearToEmployee(2020);
+//		employees.getEmployeeByOrderId(1).getYearByOrder(1).increaseHoursWorkedInMonth(3, 666);
+//		
+//		employees.findEmployeeByName("Janusz").getYearByOrder(0).increaseHoursWorkedInMonth(0, 13);
+//		
+//		employees.findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(0, 7);
 
-		employees.get(0).addNewYearToEmployee(2013);
-		employees.get(0).getYearByOrder(1).increaseHoursWorkedInMonth(0, 10);
-		employees.get(0).getYearByOrder(1).increaseHoursWorkedInMonth(1, 13);
-
-		employees.add(new Employee("Grazyna"));
-		employees.get(1).addNewYearToEmployee(2012);
-		employees.get(1).getYearByOrder(0).increaseHoursWorkedInMonth(1, 333);
-		employees.get(1).addNewYearToEmployee(2020);
-		employees.get(1).getYearByOrder(1).increaseHoursWorkedInMonth(3, 666);
-		
-		findEmployeeByName("Janusz").getYearByOrder(0).increaseHoursWorkedInMonth(0, 13);
-		
-		findEmployeeByName("Janusz").findYearByCalendarDate(2012).increaseHoursWorkedInMonth(0, 7);
-
-		for (Employee employee : employees) {
+		for (Employee employee : employees.getEmployees()) {
 			System.out.println(employee.getName());
 			for (Year year : employee.getYearsWhenEmployeeWorked()) {
 				System.out.println(year.getCalendarYear());
@@ -53,19 +56,9 @@ public class Main {
 		System.out.println();
 		
 		System.out.println();
-		String path = "src/main/resources/";
-		double totalHoursWorked = 0;
-		ArrayList<File> excelFiles = excelLoader.FindAllExcleFiles(path);
 
-		for (File file : excelFiles) {
 
-			Workbook wb = excelLoader.loadExcelFile(file);
-			System.out.println("przed  " + totalHoursWorked);
-			totalHoursWorked += calculator.calculateTotalHoursWorked(wb);
-			System.out.println("po  " + totalHoursWorked);
-		}
 
-		System.out.println(totalHoursWorked);
 
 //		
 //		
@@ -88,12 +81,5 @@ public class Main {
 		// System.out.println(aaa);
 
 	}
-	public static Employee findEmployeeByName(String name) {
-		for (Employee employee : employees) {
-		if (employee.getName().equals(name)) {
-			return employee;
-		}
-		}
-		return null;
-	}
+
 }
