@@ -51,20 +51,7 @@ if (folder.listFiles() != null) {
 			FindAllExcleFiles(file.toString());
 		}
 	}
-//	File[] listOfFiles = folder.listFiles();
-//
-//	for (File file : listOfFiles) {
-//		if (file.isDirectory()) {
-//			System.out.println(file.getAbsolutePath());
-//			printTree(file.getPath());
-//		} else {
-//			System.out.println(file.getAbsolutePath());
-//		}
-//
-//	}
-//
-//
-//}
+
 }
 	return AllExcelFiles;
 

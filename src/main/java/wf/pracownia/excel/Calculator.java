@@ -30,11 +30,9 @@ public class Calculator {
 			if (employees.findEmployeeByName(currentEmployeeName) == null) {
 
 				employees.addNewEmployee(currentEmployeeName);
-				System.out.println("dodałem " + currentEmployeeName);
 			}
 
 			for (Sheet sheet : wb) {
-				System.out.println(sheet.getSheetName());
 				for (Row row : sheet) {
 					if (row.getRowNum() != 0) {
 						if (row.getCell(2) != null) {

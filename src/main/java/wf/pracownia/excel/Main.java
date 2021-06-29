@@ -26,6 +26,9 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 
 		System.out.println("main");
+		
+
+		
 // procesowanie lini komend. Pewnie nie powinno być całew main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
 		String pathFromCommandLine = null;
 		Options options = new Options();
@@ -55,8 +58,8 @@ public class Main {
 		if (pathFromCommandLine!= null) {
 			path = pathFromCommandLine;}
 		else {
-			
-			path = utils.askForPath();
+			path = "src\\main\\resources";
+			//path = utils.askForPath();
 		}
 		
 		calculator.calculateDailyWorkWorEachDayforEachEmployee(path, employees);
@@ -69,6 +72,11 @@ public class Main {
 		Map<Date, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
 		System.out.println(resultsByDay);
 
+		SortByValue sv = new SortByValue(resultsByEmployee);
+		System.out.println("posortowane " + sv.sort());	
+		
+	
+		
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
 //		
