@@ -47,6 +47,12 @@ public class Calculator {
 							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
 									.findMonthbyCalendarNumber(month).findDaybyCalendarNumber(day)
 									.increaseHoursWorked(day, row.getCell(2).getNumericCellValue());
+//							System.out.print(currentEmployeeName + " ");
+//							System.out.print(sheet.getSheetName() + " ");
+//							System.out.print(day + "-");
+//							System.out.print(month + "-");
+//							System.out.print(year + "-");
+//							System.out.println(row.getCell(2).getNumericCellValue());
 						}
 
 					}
@@ -78,20 +84,20 @@ public class Calculator {
 		return resultsByEmployee;
 	}
 
-	public Map<Date, Double> calculateTotalsByMonths(Employees employees) {
-		Map<Date, Double> resultsByMonth = new HashMap<Date, Double>();
+	public Map<String, Double> calculateTotalsByMonths(Employees employees) {
+		Map<String, Double> resultsByMonth = new HashMap<String, Double>();
 		Date date;
 		for (Employee employee : employees.getEmployees()) {
 			for (Year year : employee.getYearsWhenEmployeeWorked()) {
 				for (Month month : year.getMonths()) {
 					for (Day day : month.getDays()) {
 						date = new Date(year.getCalendarYear(), month.getMonthNumber(), 1);
-						if (resultsByMonth.get(date) == null) {
-							resultsByMonth.put(date, (double) 0);
+						if (resultsByMonth.get(convertDateToYearMonthString(date)) == null) {
+							resultsByMonth.put(convertDateToYearMonthString(date), (double) 0);
 						}
-						double hours = resultsByMonth.get(date);
+						double hours = resultsByMonth.get(convertDateToYearMonthString(date));
 						hours += day.getHoursWorked();
-						resultsByMonth.put(date, hours);
+						resultsByMonth.put(convertDateToYearMonthString(date), hours);
 					}
 				}
 			}
@@ -100,26 +106,36 @@ public class Calculator {
 		return resultsByMonth;
 	}
 
-	public Map<Date, Double> calculateTotalsByDay(Employees employees) {
-		Map<Date, Double> resultsByDay = new HashMap<Date, Double>();
+	public Map<String, Double> calculateTotalsByDay(Employees employees) {
+		Map<String, Double> resultsByDay = new HashMap<String, Double>();
 		Date date;
 		for (Employee employee : employees.getEmployees()) {
 			for (Year year : employee.getYearsWhenEmployeeWorked()) {
 				for (Month month : year.getMonths()) {
 					for (Day day : month.getDays()) {
 						date = new Date(year.getCalendarYear(), month.getMonthNumber(), day.getDayNumber());
-						if (resultsByDay.get(date) == null) {
-							resultsByDay.put(date, (double) 0);
+						if (resultsByDay.get(convertDateToYearMonthDayString(date)) == null) {
+							resultsByDay.put(convertDateToYearMonthDayString(date), (double) 0);
 						}
-						double hours = resultsByDay.get(date);
+						double hours = resultsByDay.get(convertDateToYearMonthDayString(date));
 						hours += day.getHoursWorked();
-						resultsByDay.put(date, hours);
+						resultsByDay.put(convertDateToYearMonthDayString(date), hours);
+						}
 					}
 				}
 			}
-		}
+		
 
 		return resultsByDay;
 	}
-	
+
+	public String convertDateToYearMonthString(Date date) {
+		int correctedMonth = date.getMonth() +1;
+		return correctedMonth + "-" + date.getYear();
+	}
+
+	public String convertDateToYearMonthDayString(Date date) {
+		int correctedMonth = date.getMonth() +1;
+		return date.getDate() + "-" + correctedMonth + "-" + date.getYear();
+	}
 }

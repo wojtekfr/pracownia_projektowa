@@ -67,15 +67,17 @@ public class Main {
 		Map<String, Double> resultsByEmployee = calculator.calculateTotalsByEmployee(employees);
 		System.out.println(resultsByEmployee);
 		calculator.calculateTotalsByMonths(employees);
-		Map<Date, Double> resultsByMonth = calculator.calculateTotalsByMonths(employees);
+		Map<String, Double> resultsByMonth = calculator.calculateTotalsByMonths(employees);
 		System.out.println(resultsByMonth);
-		Map<Date, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
+		Map<String, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
 		System.out.println(resultsByDay);
 
 		SortByValue sv = new SortByValue(resultsByEmployee);
 		System.out.println("posortowane " + sv.sort());	
-		
-	
+		SortByValue sv2 = new SortByValue(resultsByMonth);
+		System.out.println("posortowane " + sv2.sort());	
+		SortByValue sv3 = new SortByValue(resultsByDay);
+		System.out.println("posortowane " + sv3.sort());
 		
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
