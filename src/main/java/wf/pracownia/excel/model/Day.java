@@ -1,4 +1,4 @@
-package wf.pracownia.excel;
+package wf.pracownia.excel.model;
 
 public class Day {
 

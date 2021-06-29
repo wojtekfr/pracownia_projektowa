@@ -10,12 +10,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import wf.pracownia.excel.model.Day;
+import wf.pracownia.excel.model.Month;
+import wf.pracownia.excel.model.Year;
+
 public class Calculator {
 	ExcelLoader excelLoader = new ExcelLoader();
 	Utilities utilities = new Utilities();
 
 	public void calculateDailyWorkWorEachDayforEachEmployee(String path, Employees employees) {
-		double totalHoursWorked = 0;
 		ArrayList<File> excelFiles = excelLoader.FindAllExcleFiles(path);
 
 		for (File file : excelFiles) {

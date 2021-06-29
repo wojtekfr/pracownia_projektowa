@@ -6,24 +6,59 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.SystemOutLogger;
+
+import wf.pracownia.excel.model.Day;
+import wf.pracownia.excel.model.Month;
+import wf.pracownia.excel.model.Year;
 
 public class Main {
 
+	public static void main(String[] args) throws ParseException {
 
-
-	public static void main(String[] args) {
 		System.out.println("main");
+// procesowanie lini komend. Pewnie nie powinno być całew main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
+		String pathFromCommandLine = null;
+		Options options = new Options();
+		Option filename = OptionBuilder.withArgName("file").hasArg().withDescription("file for processing")
+				.create("filename");
+		options.addOption(filename);
+		CommandLineParser parser = new DefaultParser();
+		try {
+			CommandLine line = parser.parse(options, args);
+			if (line.hasOption("filename")) {
+				pathFromCommandLine = line.getOptionValue("filename");
+			}
+		} catch (ParseException exp) {
+			// oops, something went wrong
+			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+		}
+	
 		
 		
 		
 		Calculator calculator = new Calculator();
 		Employees employees = new Employees();
+		Utilities utils = new Utilities();
 		
 		
-		String path = "src/main/resources/";
+		String path;
+		if (pathFromCommandLine!= null) {
+			path = pathFromCommandLine;}
+		else {
+			
+			path = utils.askForPath();
+		}
+		
 		calculator.calculateDailyWorkWorEachDayforEachEmployee(path, employees);
 		System.out.println("--");
 		Map<String, Double> resultsByEmployee = calculator.calculateTotalsByEmployee(employees);
@@ -33,7 +68,7 @@ public class Main {
 		System.out.println(resultsByMonth);
 		Map<Date, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
 		System.out.println(resultsByDay);
-		
+
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
 //		
@@ -59,22 +94,20 @@ public class Main {
 //
 //	
 
-		for (Employee employee : employees.getEmployees()) {
-			System.out.println(employee.getName());
-			for (Year year : employee.getYearsWhenEmployeeWorked()) {
-				System.out.println("Rok " + year.getCalendarYear());
-				for (Month month : year.getMonths()) {
-				 System.out.println("Miesiąc " + month.getMonthNumber());
-				 int counter = 0;
-				 for (Day day : month.getDays()) {
-					System.out.println("dzień : " + day.getDayNumber() + " : " + day.getHoursWorked());
-					counter++;
-				}
-			}
-	
-		}
-
-
+//		for (Employee employee : employees.getEmployees()) {
+//			System.out.println(employee.getName());
+//			for (Year year : employee.getYearsWhenEmployeeWorked()) {
+//				System.out.println("Rok " + year.getCalendarYear());
+//				for (Month month : year.getMonths()) {
+//					System.out.println("Miesiąc " + month.getMonthNumber());
+//					int counter = 0;
+//					for (Day day : month.getDays()) {
+//						System.out.println("dzień : " + day.getDayNumber() + " : " + day.getHoursWorked());
+//						counter++;
+//					}
+//				}
+//
+//			}
 
 //		
 //		
@@ -93,10 +126,11 @@ public class Main {
 //		}
 //		
 //		System.out.println();
-		// String aaa = Utilities.getExtensionByStringHandling("qqqq.xxxxxx");
-		// System.out.println(aaa);
+			// String aaa = Utilities.getExtensionByStringHandling("qqqq.xxxxxx");
+			// System.out.println(aaa);
 
-	}
+	
+
+	
 	}
 }
-

@@ -2,6 +2,7 @@ package wf.pracownia.excel;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.Scanner;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -21,6 +22,12 @@ public class Utilities {
 		String employeeName = fileNameFirstSplit[0] + " " + fileNameSecondSplit[0];
 		return employeeName;
 		
+	}
+	
+	public String askForPath() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter path contaning files for processing");
+		return scanner.nextLine();
 	}
 	
 }

@@ -1,4 +1,4 @@
-package wf.pracownia.excel;
+package wf.pracownia.excel.model;
 
 import java.util.ArrayList;
 

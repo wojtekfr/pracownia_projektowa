@@ -2,6 +2,8 @@ package wf.pracownia.excel;
 
 import java.util.ArrayList;
 
+import wf.pracownia.excel.model.Year;
+
 public class Employee {
 	private ArrayList<Year> yearsWhenEmployeeWorked = new ArrayList<Year>();
 	private String name;
