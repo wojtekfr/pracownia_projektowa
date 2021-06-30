@@ -27,10 +27,6 @@ public class Main {
 	public static void main(String[] args) throws ParseException {
 // procesowanie lini komend. Pewnie nie powinno być całe w main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
 
-		System.out.println(args);
-		for (String s : args) {
-			System.out.println("parametr " + s);
-		}
 
 		String pathFromCommandLine = null;
 		Options options = new Options();
