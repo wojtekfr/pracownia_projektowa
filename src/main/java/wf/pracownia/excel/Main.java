@@ -26,19 +26,14 @@ public class Main {
 
 	public static void main(String[] args) throws ParseException {
 
-		
 		Calculator calculator = new Calculator();
 		Employees employees = new Employees();
 		Printer printer = new Printer();
 		ExcelLoader excelLoader = new ExcelLoader();
 		Utilities utilities = new Utilities();
-		
-
 
 		String pathFromCommandLine = utilities.getPathFromCommandLine(args);
 
-
-		
 		String path;
 		if (pathFromCommandLine != null) {
 			path = pathFromCommandLine;
@@ -52,12 +47,14 @@ public class Main {
 			return;
 		}
 
+		// wykonuje główne przeliczenie - w kontekście pracownika, dodaje dla każdego dnia sumę przepracowanych godzin
 		boolean doesFolderContainExcelFiles = calculator.calculateDailyWorkWorEachDayforEachEmployee(path, employees);
 		if (!doesFolderContainExcelFiles) {
 			System.out.println("No excel files found in provided path");
 			return;
 		}
 
+		// na bazie wcześniejszego przeliczenia, wykonuje agregacje określone w zadaniu 
 		Map<String, Double> resultsByEmployee = calculator.calculateTotalsByEmployee(employees);
 		Map<String, Double> resultsByMonth = calculator.calculateTotalsByMonths(employees);
 		Map<String, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
@@ -69,7 +66,6 @@ public class Main {
 		printer.printResults(sorterByEmployee.sort(), "Ranking of employees by most hard working", false);
 		printer.printResults(sorterByMonth.sort(), "Ranking of months by most hard working", false);
 		printer.printResults(sorterByDay.sort(), "Ranking of days by 10 most hard working", true);
-		
-	
+
 	}
 }

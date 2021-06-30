@@ -21,10 +21,8 @@ public class Utilities {
 		} else {
 			return null;
 		}
-
 		String employeeName = fileNameFirstSplit[0] + " " + fileNameSecondSplit[0];
 		return employeeName;
-
 	}
 
 	public String askForPath() {
@@ -33,9 +31,7 @@ public class Utilities {
 		return scanner.nextLine();
 	}
 
-	public String getPathFromCommandLine (String[] args) {
-
-
+	public String getPathFromCommandLine(String[] args) {
 		String pathFromCommandLine = null;
 		Options options = new Options();
 		Option filename = OptionBuilder.withArgName("file").hasArg().withDescription("file for processing")
@@ -46,17 +42,14 @@ public class Utilities {
 			CommandLine line = parser.parse(options, args);
 			if (line.hasOption("filename")) {
 				if (line.getOptionValue("filename").endsWith("\\")) {
-				System.out.println("!!!");
+					System.out.println("!!!");
 				}
-						
+
 				pathFromCommandLine = line.getOptionValue("filename");
 			}
 		} catch (ParseException exp) {
-
 			System.err.println("Parsing command line parameters failed.  Reason: " + exp.getMessage());
 		}
-
 		return pathFromCommandLine;
 	}
-	
 }

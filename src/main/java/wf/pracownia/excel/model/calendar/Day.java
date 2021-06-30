@@ -2,17 +2,18 @@ package wf.pracownia.excel.model.calendar;
 
 public class Day {
 
+	int dayNumber;
+	double hoursWorked;
+
 	public int getDayNumber() {
 		return dayNumber;
 	}
 
-	int dayNumber;
 	public Day(int dayNumber) {
 		super();
 		this.dayNumber = dayNumber;
 	}
-	
-	double hoursWorked;
+
 	public double getHoursWorked() {
 		return hoursWorked;
 	}

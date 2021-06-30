@@ -19,11 +19,11 @@ public class Sorter {
 		this.map = map;
 	}
 
-	public Map<String, Double > sort() {
+	public Map<String, Double> sort() {
 		this.map = map;
 		Sorter sv = new Sorter(map);
 
-		Map<String, Double>sortedMap = sv.sortByValue(false);
+		Map<String, Double> sortedMap = sv.sortByValue(false);
 		return sortedMap;
 	}
 	// method to add elements in the HashMap
@@ -49,14 +49,5 @@ public class Sorter {
 			sortedMap.put(entry.getKey(), entry.getValue());
 		}
 		return sortedMap;
-	}
-
-	// method for printing the elements
-	public void printMap(Map<String, Double> map) {
-		System.out.println("Company\t Price ");
-		for (Entry<String, Double> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + "\t" + entry.getValue());
-		}
-		System.out.println("\n");
 	}
 }

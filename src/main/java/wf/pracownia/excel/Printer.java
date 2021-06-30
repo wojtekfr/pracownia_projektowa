@@ -16,7 +16,7 @@ public class Printer {
 					break;
 			}
 		}
-	
+
 	}
 
 }

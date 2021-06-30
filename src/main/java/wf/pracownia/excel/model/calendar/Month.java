@@ -3,14 +3,14 @@ package wf.pracownia.excel.model.calendar;
 import java.util.ArrayList;
 
 public class Month {
+
+	private ArrayList<Day> days = new ArrayList<Day>();
+	private int monthNumber;
+
 	public ArrayList<Day> getDays() {
 		return days;
 	}
 
-	private ArrayList<Day> days = new ArrayList<Day>();
-	
-	private int monthNumber;
-	
 	public int getMonthNumber() {
 		return monthNumber;
 	}
@@ -19,27 +19,19 @@ public class Month {
 		super();
 		this.monthNumber = monthNumber;
 	}
-	
-	
-
 
 	public void addNewDay(int dayNumber) {
-	
-	if (findDaybyCalendarNumber(dayNumber) == null) {
-	days.add(new Day(dayNumber));}
+
+		if (findDaybyCalendarNumber(dayNumber) == null) {
+			days.add(new Day(dayNumber));
+		}
 	}
-	
+
 	public Day findDaybyCalendarNumber(int dayNumber) {
-		for (Day day: days) {
-			if ( day.getDayNumber() == dayNumber) return day; 
-					}
-			return null;
+		for (Day day : days) {
+			if (day.getDayNumber() == dayNumber)
+				return day;
+		}
+		return null;
 	}
-	
-	public void addNewMonthToYear(int monthNumber) {
-	
-
-	
-
-}
 }
