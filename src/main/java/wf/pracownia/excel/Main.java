@@ -59,20 +59,21 @@ public class Main {
 		}
 
 		calculator.calculateDailyWorkWorEachDayforEachEmployee(path, employees);
-		System.out.println("--");
+
 		Map<String, Double> resultsByEmployee = calculator.calculateTotalsByEmployee(employees);
-		System.out.println(resultsByEmployee);
+		
 		calculator.calculateTotalsByMonths(employees);
 		Map<String, Double> resultsByMonth = calculator.calculateTotalsByMonths(employees);
-		System.out.println(resultsByMonth);
-		Map<String, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
-		System.out.println(resultsByDay);
-
-		SortByValue sv = new SortByValue(resultsByEmployee);
-		SortByValue sv2 = new SortByValue(resultsByMonth);
-		SortByValue sv3 = new SortByValue(resultsByDay);
 		
-		printer.printResults(sv3.sort(),"Most hard working days");
+		Map<String, Double> resultsByDay = calculator.calculateTotalsByDay(employees);
+
+
+		Sorter sorterByEmployee = new Sorter(resultsByEmployee);
+		Sorter sorterByMonth = new Sorter(resultsByMonth);
+		Sorter sorterByDay = new Sorter(resultsByDay);
+		printer.printResults(sorterByEmployee.sort(),"Ranking of employees by most hard working", false);
+		printer.printResults(sorterByMonth.sort(),"Ranking of months by most hard working", false);
+		printer.printResults(sorterByDay.sort(),"Ranking of days by 10 most hard working", true);
 
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);

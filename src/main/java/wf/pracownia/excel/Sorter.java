@@ -10,20 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class SortByValue {
+public class Sorter {
 	// implementation of HashMap
 	Map<String, Double> map = new HashMap<String, Double>();
 
-	public SortByValue(Map<String, Double> map) {
+	public Sorter(Map<String, Double> map) {
 		super();
 		this.map = map;
 	}
 
 	public Map<String, Double > sort() {
 		this.map = map;
-		System.out.println("zrodlowa " + map);
-		System.out.println("docelowa " + this.map);
-		SortByValue sv = new SortByValue(map);
+		Sorter sv = new Sorter(map);
 
 		Map<String, Double>sortedMap = sv.sortByValue(false);
 		return sortedMap;
