@@ -1,8 +1,8 @@
-package wf.pracownia.excel;
+package wf.pracownia.excel.model;
 
 import java.util.ArrayList;
 
-import wf.pracownia.excel.model.Year;
+import wf.pracownia.excel.model.calendar.Year;
 
 public class Employee {
 	private ArrayList<Year> yearsWhenEmployeeWorked = new ArrayList<Year>();

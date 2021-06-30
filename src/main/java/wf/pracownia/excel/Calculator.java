@@ -10,9 +10,11 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import wf.pracownia.excel.model.Day;
-import wf.pracownia.excel.model.Month;
-import wf.pracownia.excel.model.Year;
+import wf.pracownia.excel.model.Employee;
+import wf.pracownia.excel.model.Employees;
+import wf.pracownia.excel.model.calendar.Day;
+import wf.pracownia.excel.model.calendar.Month;
+import wf.pracownia.excel.model.calendar.Year;
 
 public class Calculator {
 	ExcelLoader excelLoader = new ExcelLoader();

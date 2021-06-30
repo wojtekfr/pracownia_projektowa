@@ -17,19 +17,19 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.SystemOutLogger;
 
-import wf.pracownia.excel.model.Day;
-import wf.pracownia.excel.model.Month;
-import wf.pracownia.excel.model.Year;
+import wf.pracownia.excel.model.Employees;
+import wf.pracownia.excel.model.calendar.Day;
+import wf.pracownia.excel.model.calendar.Month;
+import wf.pracownia.excel.model.calendar.Year;
 
 public class Main {
 
 	public static void main(String[] args) throws ParseException {
 
 		System.out.println("main");
-		
 
-		
-// procesowanie lini komend. Pewnie nie powinno być całew main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
+// procesowanie lini komend. Pewnie nie powinno być całe w main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
+
 		String pathFromCommandLine = null;
 		Options options = new Options();
 		Option filename = OptionBuilder.withArgName("file").hasArg().withDescription("file for processing")
@@ -45,23 +45,19 @@ public class Main {
 			// oops, something went wrong
 			System.err.println("Parsing failed.  Reason: " + exp.getMessage());
 		}
-	
-		
-		
-		
+
 		Calculator calculator = new Calculator();
 		Employees employees = new Employees();
-		Utilities utils = new Utilities();
-		
-		
+		Printer printer = new Printer();
+
 		String path;
-		if (pathFromCommandLine!= null) {
-			path = pathFromCommandLine;}
-		else {
+		if (pathFromCommandLine != null) {
+			path = pathFromCommandLine;
+		} else {
 			path = "src\\main\\resources";
-			//path = utils.askForPath();
+			// path = utils.askForPath();
 		}
-		
+
 		calculator.calculateDailyWorkWorEachDayforEachEmployee(path, employees);
 		System.out.println("--");
 		Map<String, Double> resultsByEmployee = calculator.calculateTotalsByEmployee(employees);
@@ -73,12 +69,11 @@ public class Main {
 		System.out.println(resultsByDay);
 
 		SortByValue sv = new SortByValue(resultsByEmployee);
-		System.out.println("posortowane " + sv.sort());	
 		SortByValue sv2 = new SortByValue(resultsByMonth);
-		System.out.println("posortowane " + sv2.sort());	
 		SortByValue sv3 = new SortByValue(resultsByDay);
-		System.out.println("posortowane " + sv3.sort());
 		
+		printer.printResults(sv3.sort(),"Most hard working days");
+
 //	employees.addNewEmployee("Janusz");
 //	employees.findEmployeeByName("Janusz").addNewYearToEmployee(2012);
 //		
@@ -136,11 +131,8 @@ public class Main {
 //		}
 //		
 //		System.out.println();
-			// String aaa = Utilities.getExtensionByStringHandling("qqqq.xxxxxx");
-			// System.out.println(aaa);
+		// String aaa = Utilities.getExtensionByStringHandling("qqqq.xxxxxx");
+		// System.out.println(aaa);
 
-	
-
-	
 	}
 }

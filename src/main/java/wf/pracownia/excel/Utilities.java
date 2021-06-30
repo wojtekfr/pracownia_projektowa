@@ -1,19 +1,14 @@
 package wf.pracownia.excel;
 
-import java.io.File;
-import java.util.Optional;
+
 import java.util.Scanner;
 
-import org.apache.commons.io.FilenameUtils;
+
 
 public class Utilities {
 
 
 
-	public static String getExtension(String filename) {
-	    return FilenameUtils.getExtension(filename);
-	}
-	
 	public String parseNameFromFile(String fileName) {
 
 		String[] fileNameFirstSplit = fileName.split("_");
