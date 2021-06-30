@@ -25,31 +25,20 @@ import wf.pracownia.excel.model.calendar.Year;
 public class Main {
 
 	public static void main(String[] args) throws ParseException {
-// procesowanie lini komend. Pewnie nie powinno być całe w main, ale jesli umieszczłem je gdzie indziej  sypał błedami o braku zmiennej args
 
-
-		String pathFromCommandLine = null;
-		Options options = new Options();
-		Option filename = OptionBuilder.withArgName("file").hasArg().withDescription("file for processing")
-				.create("filename");
-		options.addOption(filename);
-		CommandLineParser parser = new DefaultParser();
-		try {
-			CommandLine line = parser.parse(options, args);
-			if (line.hasOption("filename")) {
-				pathFromCommandLine = line.getOptionValue("filename");
-			}
-		} catch (ParseException exp) {
-
-			System.err.println("Parsing command line parameters failed.  Reason: " + exp.getMessage());
-		}
-
+		
 		Calculator calculator = new Calculator();
 		Employees employees = new Employees();
 		Printer printer = new Printer();
 		ExcelLoader excelLoader = new ExcelLoader();
 		Utilities utilities = new Utilities();
+		
 
+
+		String pathFromCommandLine = utilities.getPathFromCommandLine(args);
+
+
+		
 		String path;
 		if (pathFromCommandLine != null) {
 			path = pathFromCommandLine;
