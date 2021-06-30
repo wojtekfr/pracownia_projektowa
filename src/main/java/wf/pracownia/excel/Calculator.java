@@ -20,49 +20,58 @@ public class Calculator {
 	ExcelLoader excelLoader = new ExcelLoader();
 	Utilities utilities = new Utilities();
 
-	public void calculateDailyWorkWorEachDayforEachEmployee(String path, Employees employees) {
+	public boolean calculateDailyWorkWorEachDayforEachEmployee(String path, Employees employees) {
 		ArrayList<File> excelFiles = excelLoader.FindAllExcleFiles(path);
+		System.out.println("Found " + excelFiles.size() + " excel files");
+		
+		
+		if (excelFiles.isEmpty()) {
+			return false;
+		}
 
 		for (File file : excelFiles) {
+			
+		}
 
+		for (File file : excelFiles) {
+		
 			Workbook wb = excelLoader.loadExcelFile(file);
 
 			String currentEmployeeName = utilities.parseNameFromFile(file.getName());
+	
+			// zabezpieczneie na wypadek gdyby plik excelowy nie zawieral danych pracownika
+			// w przewidywalnym formacie
+			if (currentEmployeeName != null) {
+				if (employees.findEmployeeByName(currentEmployeeName) == null) {
 
-			if (employees.findEmployeeByName(currentEmployeeName) == null) {
+					employees.addNewEmployee(currentEmployeeName);
+				}
 
-				employees.addNewEmployee(currentEmployeeName);
-			}
+				for (Sheet sheet : wb) {
+					for (Row row : sheet) {
+						if (row.getRowNum() != 0) {
+							if (row.getCell(2) != null) {
+								int year = 1900 + row.getCell(0).getDateCellValue().getYear();
+								int month = row.getCell(0).getDateCellValue().getMonth();
+								int day = row.getCell(0).getDateCellValue().getDate();
+								employees.findEmployeeByName(currentEmployeeName).addNewYearToEmployee(year);
+								employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
+										.addNewMonthToYear(month);
+								employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
+										.findMonthbyCalendarNumber(month).addNewDay(day);
+								employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
+										.findMonthbyCalendarNumber(month).findDaybyCalendarNumber(day)
+										.increaseHoursWorked(day, row.getCell(2).getNumericCellValue());
 
-			for (Sheet sheet : wb) {
-				for (Row row : sheet) {
-					if (row.getRowNum() != 0) {
-						if (row.getCell(2) != null) {
-							int year = 1900 + row.getCell(0).getDateCellValue().getYear();
-							int month = row.getCell(0).getDateCellValue().getMonth();
-							int day = row.getCell(0).getDateCellValue().getDate();
-							employees.findEmployeeByName(currentEmployeeName).addNewYearToEmployee(year);
-							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
-									.addNewMonthToYear(month);
-							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
-									.findMonthbyCalendarNumber(month).addNewDay(day);
-							employees.findEmployeeByName(currentEmployeeName).findYearByCalendarYear(year)
-									.findMonthbyCalendarNumber(month).findDaybyCalendarNumber(day)
-									.increaseHoursWorked(day, row.getCell(2).getNumericCellValue());
-//							System.out.print(currentEmployeeName + " ");
-//							System.out.print(sheet.getSheetName() + " ");
-//							System.out.print(day + "-");
-//							System.out.print(month + "-");
-//							System.out.print(year + "-");
-//							System.out.println(row.getCell(2).getNumericCellValue());
+							}
+
 						}
 
 					}
-
 				}
-
 			}
 		}
+		return true;
 	}
 
 	public Map<String, Double> calculateTotalsByEmployee(Employees employees) {
@@ -122,22 +131,21 @@ public class Calculator {
 						double hours = resultsByDay.get(convertDateToYearMonthDayString(date));
 						hours += day.getHoursWorked();
 						resultsByDay.put(convertDateToYearMonthDayString(date), hours);
-						}
 					}
 				}
 			}
-		
+		}
 
 		return resultsByDay;
 	}
 
 	public String convertDateToYearMonthString(Date date) {
-		int correctedMonth = date.getMonth() +1;
+		int correctedMonth = date.getMonth() + 1;
 		return correctedMonth + "-" + date.getYear();
 	}
 
 	public String convertDateToYearMonthDayString(Date date) {
-		int correctedMonth = date.getMonth() +1;
+		int correctedMonth = date.getMonth() + 1;
 		return date.getDate() + "-" + correctedMonth + "-" + date.getYear();
 	}
 }
