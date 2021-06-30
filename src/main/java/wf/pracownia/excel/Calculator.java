@@ -46,11 +46,12 @@ public class Calculator {
 
 					employees.addNewEmployee(currentEmployeeName);
 				}
-
+				
 				for (Sheet sheet : wb) {
 					for (Row row : sheet) {
 						if (row.getRowNum() != 0) {
 							if (row.getCell(2) != null) {
+								try {
 								int year = 1900 + row.getCell(0).getDateCellValue().getYear();
 								int month = row.getCell(0).getDateCellValue().getMonth();
 								int day = row.getCell(0).getDateCellValue().getDate();
@@ -63,15 +64,22 @@ public class Calculator {
 										.findMonthbyCalendarNumber(month).findDaybyCalendarNumber(day)
 										.increaseHoursWorked(day, row.getCell(2).getNumericCellValue());
 
+							} catch (IllegalStateException exp) {
+								System.err.println("Skiping row with incorrect data in file " + file.getAbsolutePath() + " sheet: " + sheet.getSheetName()) ;
+								
 							}
 
 						}
-
+						}
 					}
 				}
 			}
-		}
-		return true;
+		
+			else {
+				System.out.println("Skiping incorrect file " + file.getAbsolutePath());
+			}
+		}return true;
+
 	}
 
 	public Map<String, Double> calculateTotalsByEmployee(Employees employees) {
